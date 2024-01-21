@@ -1,0 +1,217 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6617,        207]
+NotebookOptionsPosition[      6252,        193]
+NotebookOutlinePosition[      6663,        209]
+CellTagsIndexPosition[      6620,        206]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fuse", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"a", "+", "b", "+", "1"}], ")"}], "/", 
+   "2"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FuseTree", "[", 
+   RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"FuseTree", "[", 
+    RowBox[{"a", ",", "b"}], "]"}], "=", 
+   RowBox[{"Tree", "[", 
+    RowBox[{
+     RowBox[{"fuse", "[", 
+      RowBox[{
+       RowBox[{"TreeData", "[", "a", "]"}], ",", " ", 
+       RowBox[{"TreeData", "[", "b", "]"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}]}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Groupings", "[", 
+   RowBox[{
+    RowBox[{"ConstantArray", "[", 
+     RowBox[{
+      RowBox[{"Tree", "[", 
+       RowBox[{"0", ",", "None"}], "]"}], ",", "6"}], "]"}], ",", 
+    RowBox[{"FuseTree", "->", 
+     RowBox[{"{", 
+      RowBox[{"2", " ", ",", "Orderless"}], "}"}]}]}], "]"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearAll", "[", "partitions2", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"partitions2", "[", 
+   RowBox[{"n_Integer", "?", "OddQ"}], "]"}], ":=", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", "=", 
+      RowBox[{"Range", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"n", "-", "1"}], ")"}], "/", "2"}], "]"}]}], "}"}], ",", 
+    RowBox[{"Prepend", "[", 
+     RowBox[{
+      RowBox[{"Thread", "[", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", 
+         RowBox[{"n", "-", "x"}]}], "}"}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "n"}], "}"}]}], "]"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"partitions2", "[", 
+    RowBox[{"n_Integer", "?", "EvenQ"}], "]"}], ":=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", "=", 
+       RowBox[{"Range", "[", 
+        RowBox[{"n", "/", "2"}], "]"}]}], "}"}], ",", 
+     RowBox[{"Prepend", "[", 
+      RowBox[{
+       RowBox[{"Thread", "[", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{"n", "-", "x"}]}], "}"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "n"}], "}"}]}], "]"}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearAll", "[", "decompose", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"decompose", "[", 
+    RowBox[{"n", ":", 
+     RowBox[{"(", 
+      RowBox[{"_Integer", "|", "_Rational"}], ")"}]}], "]"}], "/;", 
+   RowBox[{"n", ">", "0"}]}], " ", ":=", "\[IndentingNewLine]", 
+  RowBox[{"Rule", "@@@", 
+   RowBox[{"descend", "[", "n", "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"descend", "[", "n_Rational", "]"}], "/;", 
+   RowBox[{"n", ">", "0"}]}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"k", "=", 
+       RowBox[{
+        RowBox[{"2", "n"}], "-", "1"}]}], ",", "p", ",", "q"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"k", "<", "0"}], ",", 
+       RowBox[{"Return", "[", 
+        RowBox[{"{", "}"}], "]"}]}], "]"}], ";", 
+     RowBox[{"p", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"partitions2", "[", 
+         RowBox[{"Numerator", "[", "k", "]"}], "]"}], "/", 
+        RowBox[{"Denominator", "[", "k", "]"}]}], "//", 
+       RowBox[{"DeleteCases", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i_", ",", "j_"}], "}"}], "/;", 
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"i", "-", "j"}], "]"}], ">", "1"}]}], "]"}]}]}], ";", 
+     RowBox[{"q", "=", 
+      RowBox[{"MapApply", "[", 
+       RowBox[{"\[ScriptF]", ",", 
+        RowBox[{"Catenate", "/@", 
+         RowBox[{"DeleteCases", "[", 
+          RowBox[{
+           RowBox[{"Map", "[", 
+            RowBox[{"descend", ",", "p", ",", 
+             RowBox[{"{", "2", "}"}]}], "]"}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", "}"}], ",", "_"}], "}"}], "|", 
+            RowBox[{"{", 
+             RowBox[{"_", ",", 
+              RowBox[{"{", "}"}]}], "}"}]}]}], "]"}]}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"\[ScriptF]", "[", 
+         RowBox[{"n", ",", 
+          RowBox[{"MapApply", "[", 
+           RowBox[{"\[ScriptF]", ",", "#"}], "]"}]}], "]"}], "&"}], ",", 
+       "q"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"descend", "[", "n_Integer", "]"}], "/;", 
+   RowBox[{"n", ">", "0"}]}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"f", "=", 
+      RowBox[{"descend", "/@", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"2", "n"}], "-", "1"}], ")"}], "/", "2"}], ",", 
+         RowBox[{"{", "2", "}"}]}], "]"}]}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"\[ScriptF]", "[", 
+       RowBox[{"n", ",", 
+        RowBox[{"\[ScriptF]", "@@", "#"}]}], "]"}], "&"}], "/@", 
+     RowBox[{"Thread", "@", "f"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"descend", "[", "0", "]"}], ":=", 
+   RowBox[{"{", "0", "}"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.9148685277430763`*^9, 
+  3.914868550360916*^9}},ExpressionUUID->"b7e927a2-c72b-6c49-81fb-\
+7ff618b53269"]
+},
+WindowSize->{581.25, 648.75},
+WindowMargins->{{423, Automatic}, {Automatic, 40.5}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"6f62f7c5-f6de-cb40-a60a-16f68077cff7"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5690, 171, 696, "Input",ExpressionUUID->"b7e927a2-c72b-6c49-81fb-7ff618b53269"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
