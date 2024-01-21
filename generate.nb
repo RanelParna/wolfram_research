@@ -1,0 +1,140 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4191,        130]
+NotebookOptionsPosition[      3827,        116]
+NotebookOutlinePosition[      4238,        132]
+CellTagsIndexPosition[      4195,        129]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"generating", " ", "fusible", " ", "numbers"}], "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"cond", "[", "a_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       RowBox[{"a", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "-", 
+       RowBox[{"a", "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], "]"}], "<", "1"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"sim", "[", 
+     RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"a", "+", "b", "+", "1"}], ")"}], "/", "2"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nextFusibles", "[", "fusiblesIn_", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"t", ",", "newFusibles"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"t", "=", 
+        RowBox[{"Select", "[", 
+         RowBox[{
+          RowBox[{"Tuples", "[", 
+           RowBox[{"fusiblesIn", ",", "5"}], "]"}], ",", "cond"}], "]"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"newFusibles", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"sim", "[", 
+           RowBox[{
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+            RowBox[{"t", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "2"}], "]"}], "]"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"Length", "[", "t", "]"}]}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"DeleteDuplicates", "[", 
+        RowBox[{"Join", "[", 
+         RowBox[{"fusiblesIn", ",", "newFusibles"}], "]"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "this", " ", "visualizes", " ", "the", " ", "denisity", " ", "of", " ", 
+     "fusible", " ", "numbers"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Nest", "[", 
+     RowBox[{"nextFusibles", ",", 
+      RowBox[{"{", "0", "}"}], ",", "10"}], "]"}], "//", 
+    RowBox[{
+     RowBox[{"Graphics", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Line", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"#", ",", "0"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"#", ",", 
+               RowBox[{"1", "/", "8"}]}], "}"}]}], "}"}], "]"}], "&"}], "/@", 
+         "#"}], "}"}], ",", 
+       RowBox[{"Axes", "->", 
+        RowBox[{"{", 
+         RowBox[{"True", ",", "False"}], "}"}]}], ",", 
+       RowBox[{"PlotRange", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"0", ",", "4"}], "}"}], ",", "All"}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "->", 
+        RowBox[{"10", " ", "72"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"AspectRatio", "->", 
+        RowBox[{"1", "/", "10"}]}]}], "]"}], "&"}]}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.914868643177286*^9, 
+  3.9148686770363426`*^9}},ExpressionUUID->"623cd883-12c5-d849-b549-\
+40a41f413006"]
+},
+WindowSize->{581.25, 648.75},
+WindowMargins->{{423, Automatic}, {Automatic, 40.5}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"f2e0d44e-e145-c143-8793-05a49ec8227b"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3265, 94, 295, "Input",ExpressionUUID->"623cd883-12c5-d849-b549-40a41f413006"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
