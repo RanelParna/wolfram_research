@@ -1,0 +1,261 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8702,        251]
+NotebookOptionsPosition[      8337,        237]
+NotebookOutlinePosition[      8748,        253]
+CellTagsIndexPosition[      8705,        250]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "naughtsToTree", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"naughtsToTree", "::", "usage"}], "=", 
+   "\"\<naughtsToTree[string] returns a Tree expression for the 0-tilde \
+representation of a fusible number.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "[", "naughtsToTree", "]"}], "=", 
+   RowBox[{"Sort", "@", 
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", "}"}], ",", 
+      RowBox[{"Options", "[", "Tree", "]"}]}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"naughtsToTree", "[", 
+    RowBox[{"naughts_String", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", "]"}]}]}], "]"}], "/;", 
+   RowBox[{"StringMatchQ", "[", 
+    RowBox[{"naughts", ",", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+       "\"\<(\>\"", "|", "\"\<)\>\"", "|", "\"\<0\>\"", "|", "\"\<~\>\""}], 
+       ")"}], ".."}]}], "]"}]}], ":=", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ToExpression", "@", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"StringFreeQ", "[", 
+        RowBox[{"naughts", ",", "\"\<~\>\""}], "]"}], ",", "naughts", ",", 
+       RowBox[{"StringReplace", "[", 
+        RowBox[{
+         RowBox[{"\"\<(\>\"", "<>", "naughts", "<>", "\"\<)\>\""}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"\"\<(\>\"", "->", "\"\<{\>\""}], ",", 
+           RowBox[{"\"\<)\>\"", "->", "\"\<}\>\""}], ",", 
+           RowBox[{"\"\<~\>\"", "->", "\"\<,\>\""}]}], "}"}]}], "]"}]}], 
+      "]"}]}], "//", "fn"}], "//", 
+   RowBox[{
+    RowBox[{"ExpressionTree", "[", 
+     RowBox[{"#", ",", 
+      RowBox[{"FilterRules", "[", 
+       RowBox[{
+        RowBox[{"{", "opts", "}"}], ",", 
+        RowBox[{"Options", "[", "Tree", "]"}]}], "]"}], ",", 
+      RowBox[{"ImageSize", "->", 
+       RowBox[{"(", 
+        RowBox[{"18", "+", 
+         RowBox[{"36", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Count", "[", 
+             RowBox[{"#", ",", "0", ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", "\[Infinity]"}], "}"}]}], "]"}], "-", "1"}], 
+           ")"}]}]}], ")"}]}]}], "]"}], "&"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fn", "[", "0", "]"}], ":=", "0"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fn", "[", 
+    RowBox[{"pair", ":", 
+     RowBox[{"{", 
+      RowBox[{"_", ",", "_"}], "}"}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"a", ",", "b"}], "}"}], "=", 
+       RowBox[{"fn", "/@", "pair"}]}], ";", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Plus", "@@", 
+              RowBox[{"Head", "/@", 
+               RowBox[{"{", 
+                RowBox[{"a", ",", "b"}], "}"}]}]}], "/.", 
+             RowBox[{"Integer", "->", "0"}]}], ")"}], "+", "1"}], ")"}], "/", 
+         "2"}], ")"}], "[", 
+       RowBox[{"a", ",", "b"}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"treeToCombinator", "::", "usage"}], "=", 
+   "\"\<treeToCombinator[t] returns an \
+\!\(\*TemplateBox[{},\"CombinatorS\"]\) combinator expression for the fusible \
+number Tree expression t.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"treeToCombinator", "[", "t_Tree", "]"}], ":=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"c", "=", 
+       RowBox[{"Replace", "[", 
+        RowBox[{
+         RowBox[{"TreeChildren", "[", "t", "]"}], ",", 
+         RowBox[{"None", "->", 
+          RowBox[{"{", "}"}]}]}], "]"}]}], "}"}], ",", 
+     RowBox[{"Switch", "[", 
+      RowBox[{"c", ",", 
+       RowBox[{"{", "}"}], ",", 
+       TemplateBox[{},
+        "CombinatorS"], ",", 
+       RowBox[{"{", 
+        RowBox[{"_", ",", "_"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"treeToCombinator", "[", 
+         RowBox[{"First", "@", "c"}], "]"}], "[", 
+        RowBox[{"treeToCombinator", "[", 
+         RowBox[{"Last", "@", "c"}], "]"}], "]"}], ",", "_", ",", 
+       RowBox[{
+        RowBox[{"Echo", "[", "c", "]"}], ";", "$Failed"}]}], "]"}]}], "]"}]}],
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"ClearAll", "[", 
+  RowBox[{"combinatorToTree", ",", "combinatorToTreeRecurse"}], "]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"combinatorToTree", "::", "usage"}], "=", 
+   "\"\<combinatorToTree[c] returns the fusible number Tree expression for \
+the \\!\\(\\*TemplateBox[{},\\n\\\"CombinatorS\\\"]\\) combinator c.\>\""}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"combinatorToTree", "[", "c_", "]"}], ":=", 
+  RowBox[{"Catch", "@", 
+   RowBox[{"combinatorToTreeRecurse", "[", "c", "]"}]}]}], "\n", 
+ RowBox[{
+  RowBox[{"combinatorToTreeRecurse", "[", "CombinatorS", "]"}], ":=", 
+  RowBox[{"Tree", "[", 
+   RowBox[{"0", ",", "None", ",", 
+    RowBox[{"ImageSize", "->", "18"}]}], "]"}]}], "\n", 
+ RowBox[{
+  RowBox[{"combinatorToTreeRecurse", "[", 
+   RowBox[{"l_", "[", "r_", "]"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{"combinatorToTreeRecurse", "[", 
+    RowBox[{"l", "[", "r", "]"}], "]"}], "=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"lFn", "=", 
+        RowBox[{"combinatorToTreeRecurse", "[", "l", "]"}]}], ",", 
+       RowBox[{"rFn", "=", 
+        RowBox[{"combinatorToTreeRecurse", "[", "r", "]"}]}], ",", "a", ",", 
+       "b"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"a", "=", 
+       RowBox[{"TreeData", "[", "lFn", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"b", "=", 
+       RowBox[{"TreeData", "[", "rFn", "]"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Abs", "[", 
+          RowBox[{"a", "-", "b"}], "]"}], ">=", "1"}], ",", 
+        RowBox[{"Throw", "[", 
+         RowBox[{"Tree", "[", 
+          RowBox[{"$Failed", ",", "None", ",", 
+           RowBox[{"ImageSize", "->", "54"}]}], "]"}], "]"}]}], "]"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Tree", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"a", "+", "b", "+", "1"}], ")"}], "/", "2"}], ",", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Replace", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"Tree", "[", 
+                RowBox[{"0", ",", "None"}], "]"}], "->", "0"}], ",", 
+              RowBox[{"t_", ":>", 
+               RowBox[{"Tree", "[", 
+                RowBox[{
+                 RowBox[{"TreeData", "[", "t", "]"}], ",", 
+                 RowBox[{"TreeChildren", "[", "t", "]"}]}], "]"}]}]}], 
+             "}"}]}], "]"}], "&"}], "/@", 
+         RowBox[{"{", 
+          RowBox[{"lFn", ",", "rFn"}], "}"}]}], ",", 
+        RowBox[{"ImageSize", "->", 
+         RowBox[{"18", "+", 
+          RowBox[{"36", " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Total", "[", 
+              RowBox[{
+               RowBox[{
+                RowBox[{
+                 RowBox[{"(", 
+                  RowBox[{"ImageSize", "-", "18"}], ")"}], "/", "36"}], "+", 
+                "1"}], "/.", " ", 
+               RowBox[{"Options", "/@", 
+                RowBox[{"{", 
+                 RowBox[{"lFn", ",", "rFn"}], "}"}]}]}], "]"}], "-", "1"}], 
+            ")"}]}]}]}]}], "]"}]}]}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.914868440573391*^9, 
+  3.9148684587705173`*^9}},ExpressionUUID->"59441bb0-0831-d242-b414-\
+27509a47bf1a"]
+},
+WindowSize->{581.25, 648.75},
+WindowMargins->{{423, Automatic}, {Automatic, 40.5}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"917f186a-dc17-e14a-ad9f-d231e576e08d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 7775, 215, 924, "Input",ExpressionUUID->"59441bb0-0831-d242-b414-27509a47bf1a"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
