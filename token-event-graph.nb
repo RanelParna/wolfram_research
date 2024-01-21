@@ -1,0 +1,281 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10379,        271]
+NotebookOptionsPosition[      9918,        256]
+NotebookOutlinePosition[     10329,        272]
+CellTagsIndexPosition[     10286,        269]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\[IndentingNewLine]",
+   Background->RGBColor[0.87, 0.94, 1]], 
+  RowBox[{
+   StyleBox[
+    StyleBox[
+     RowBox[{"(", "*"}]],
+    Background->RGBColor[0.87, 0.94, 1]], 
+   StyleBox[" ",
+    Background->RGBColor[0.87, 0.94, 1]], 
+   RowBox[{
+    RowBox[{"The", " ", "token"}], "-", 
+    RowBox[{"event", " ", "graph"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "plot", " ", "the", " ", "fuse", " ", "operation", " ", "as", " ", "a", 
+     " ", "simple", " ", "nested", " ", "graph", " ", "that", " ", "has", " ",
+      "tokens", " ", "in", " ", "the", " ", 
+     RowBox[{"middle", ".", "These"}], " ", "tokens", " ", "act", " ", "as", 
+     " ", "disambiguation", " ", "by", " ", "showing", " ", "how", " ", "the",
+      " ", "precursor", " ", "numbers", " ", "are", " ", "fed", " ", "in", 
+     " ", "pairs", " ", "to", " ", "create", " ", "the", " ", "new", " ", 
+     "numbers", " ", "through", " ", "the", " ", "fuse", " ", "operation"}], 
+    ";", 
+    RowBox[{
+    "whereas", " ", "the", " ", "actual", " ", "nodes", " ", "of", " ", "the",
+      " ", "graph", " ", "are", " ", "the", " ", "fusible", " ", "numbers", 
+     " ", 
+     RowBox[{"themselves", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  StyleBox["\[IndentingNewLine]",
+   Background->RGBColor[0.87, 0.94, 1]], 
+  RowBox[{
+   StyleBox[
+    RowBox[{
+     RowBox[{"fuseCombine", "[", 
+      RowBox[{"a_", ",", "b_"}], "]"}], ":=", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"b", "-", "a"}], "]"}], "<", "1"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"a", "+", "b", "+", "1"}], ")"}], "/", "2"}], ",", 
+       "Nothing"}], "]"}]}],
+    Background->RGBColor[0.87, 0.94, 1]], "\[IndentingNewLine]", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{"data", "=", 
+       RowBox[{"Nest", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"Function", "[", 
+            RowBox[{
+             RowBox[{"{", "levelSets", "}"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Append", "[", 
+              RowBox[{"levelSets", ",", 
+               RowBox[{"Complement", "[", "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"Union", "[", 
+                  RowBox[{"Catenate", "@", 
+                   RowBox[{"Outer", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"Function", "[", 
+                    RowBox[{
+                    RowBox[{"{", "comb", "}"}], ",", "\[IndentingNewLine]", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"SameQ", "[", 
+                    RowBox[{"comb", ",", "Nothing"}], "]"}], ",", "Nothing", 
+                    ",", "\[IndentingNewLine]", " ", 
+                    RowBox[{
+                    RowBox[{"Sort", "[", 
+                    RowBox[{"{", 
+                    RowBox[{"#1", ",", "#2"}], "}"}], "]"}], "->", "comb"}]}],
+                     "\[IndentingNewLine]", "]"}]}], "]"}], "[", 
+                    RowBox[{"fuseCombine", "[", 
+                    RowBox[{"#1", ",", "#2"}], "]"}], "]"}], "&"}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Last", "/@", 
+                    RowBox[{"Flatten", "[", "levelSets", "]"}]}], ",", 
+                    "\[IndentingNewLine]", 
+                    RowBox[{"Last", "/@", 
+                    RowBox[{"Last", "[", "levelSets", "]"}]}], ",", "1"}], 
+                    "]"}]}], "]"}], ",", "\[IndentingNewLine]", 
+                 RowBox[{"Flatten", "[", "levelSets", "]"}]}], "]"}]}], 
+              "\[IndentingNewLine]", "]"}]}], "]"}], "[", "#", "]"}], "&"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", "0"}], "}"}], "->", "0"}], "}"}], "}"}], ",", 
+         "6"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"g", "=", 
+      RowBox[{"VertexDelete", "[", 
+       RowBox[{
+        RowBox[{"Graph", "[", 
+         RowBox[{
+          RowBox[{"Union", "[", 
+           RowBox[{
+            RowBox[{"Flatten", "[", "data", "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "1", "]"}], "]"}], "->", "#"}], ",", 
+                 RowBox[{
+                  RowBox[{"#", "[", 
+                   RowBox[{"[", "2", "]"}], "]"}], "->", "#"}]}], 
+                "\[IndentingNewLine]", "}"}], "&"}], "/@", 
+              RowBox[{
+               RowBox[{"Flatten", "[", "data", "]"}], "[", 
+               RowBox[{"[", 
+                RowBox[{"All", ",", "1"}], "]"}], "]"}]}], "]"}]}], "]"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"VertexSize", "\[Rule]", "0.6"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AspectRatio", "\[Rule]", 
+           RowBox[{"1", "/", "2"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+          "VertexShapeFunction", "\[Rule]", "\"\<RoundedDiamond\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"VertexStyle", "\[Rule]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"x_List", ":>", "Red"}], ",", 
+             RowBox[{
+              RowBox[{"x_", "/;", 
+               RowBox[{"NumberQ", "[", "x", "]"}]}], ":>", "Blue"}]}], 
+            "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+          "GraphLayout", "\[Rule]", "\"\<LayeredDigraphEmbedding\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"EdgeStyle", "->", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Opacity", "[", "0.75", "]"}], ",", 
+             RowBox[{"_", "->", 
+              RowBox[{"Directive", "[", "Thin", "]"}]}]}], "}"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"VertexLabels", "->", "None"}]}], "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0"}], "}"}]}], "]"}]}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.9148681273263874`*^9, 3.9148681274670334`*^9}, {
+  3.9148682248770638`*^9, 
+  3.914868305387209*^9}},ExpressionUUID->"4a42636a-415f-024a-9a0d-\
+3524b5150070"],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"TokenGraph", "[", 
+    RowBox[{"g_Graph", ",", 
+     RowBox[{"opts", ":", 
+      RowBox[{"OptionsPattern", "[", "Graph", "]"}]}]}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"InEdges", ",", "OutEdges", ",", "edges", ",", "vertices"}], 
+      "}"}], ",", 
+     RowBox[{
+      RowBox[{"InEdges", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Cases", "[", 
+          RowBox[{
+           RowBox[{"EdgeList", "[", "g", "]"}], ",", 
+           RowBox[{"_", "\[DirectedEdge]", 
+            RowBox[{"{", 
+             RowBox[{"_", ",", "_"}], "}"}]}]}], "]"}], "//", 
+         RowBox[{
+          RowBox[{"GroupBy", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"Last", "->", "First"}]}], "]"}], "&"}]}], "//", 
+        "KeySort"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"OutEdges", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Cases", "[", 
+          RowBox[{
+           RowBox[{"EdgeList", "[", "g", "]"}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"_", ",", "_"}], "}"}], "\[DirectedEdge]", "_"}]}], 
+          "]"}], "//", 
+         RowBox[{
+          RowBox[{"GroupBy", "[", 
+           RowBox[{"#", ",", 
+            RowBox[{"First", "->", "Last"}]}], "]"}], "&"}]}], "//", 
+        "KeySort"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"edges", "=", 
+       RowBox[{"Catenate", "@", 
+        RowBox[{"MapThread", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Catenate", "@", 
+            RowBox[{"Outer", "[", 
+             RowBox[{"DirectedEdge", ",", "##"}], "]"}]}], "&"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"InEdges", ",", "OutEdges"}], "}"}]}], "]"}]}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"vertices", "=", 
+       RowBox[{"Cases", "[", 
+        RowBox[{
+         RowBox[{"VertexList", "[", "g", "]"}], ",", 
+         RowBox[{"Except", "[", 
+          RowBox[{"{", 
+           RowBox[{"_", ",", "_"}], "}"}], "]"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"Graph", "[", 
+       RowBox[{"vertices", ",", "edges", ",", "opts", ",", 
+        RowBox[{"GraphLayout", "->", "\"\<LayeredDigraphEmbedding\>\""}], ",", 
+        RowBox[{"VertexLabels", "->", "None"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"EdgeStyle", "->", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Opacity", "[", ".75", "]"}], ",", 
+           RowBox[{"_", "->", 
+            RowBox[{"Directive", "[", "Thin", "]"}]}]}], "}"}]}]}], "]"}]}]}],
+     "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.9148681532003155`*^9, 3.9148681537110214`*^9}, {
+  3.9148683179300632`*^9, 
+  3.914868335322077*^9}},ExpressionUUID->"39cb3a92-3fea-cd48-b12b-\
+97aaaa410d51"]
+},
+WindowSize->{581.25, 648.75},
+WindowMargins->{{423, Automatic}, {Automatic, 40.5}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"ce660345-1d83-8e44-95f5-dc48b72e77d2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 6485, 157, 619, "Input",ExpressionUUID->"4a42636a-415f-024a-9a0d-3524b5150070"],
+Cell[7046, 179, 2868, 75, 352, "Input",ExpressionUUID->"39cb3a92-3fea-cd48-b12b-97aaaa410d51"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
